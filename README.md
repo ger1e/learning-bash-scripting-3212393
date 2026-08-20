@@ -1,4 +1,7 @@
-# Learning Bash Scripting 
+# Learning Bash Scripting
+
+> Historical learning repository. Retained for reference; not an actively maintained project or representative portfolio repository.
+
 This is the repository for the LinkedIn Learning course Learning Bash Scripting. The full course is available from [LinkedIn Learning][lil-course-url].
 
 ![Learning Bash Scripting ][lil-thumbnail-url]
