@@ -1,0 +1,31 @@
+name: Landing refresh
+
+on:
+  push:
+    branches:
+      - landing-audio-fix
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: landing-audio-fix
+          fetch-depth: 0
+      - name: Patch and QA landing page
+        run: python3 tools/patch-landing.py
+      - name: Commit live build
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html live.html
+          git diff --cached --quiet && exit 0
+          git commit -m "fix(site): faster heavier self-contained landing [landing-auto]"
+          git push origin HEAD:landing-audio-fix
